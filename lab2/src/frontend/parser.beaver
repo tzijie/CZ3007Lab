@@ -35,66 +35,33 @@
 Module = MODULE ID LCURLY Imports Declarations RCURLY
 			;
 
-Imports = Import Imports 
-  			| 
-   			;
+Imports = Import Imports | ;
 
-Import = IMPORT ID SEMICOLON
-			;
+Import = IMPORT ID SEMICOLON;
 
-Declarations = Declaration Declarations
-			|
-			;
+Declarations = Declaration Declarations | ;
 
-Declaration = FunctionDeclaration
-			| FieldDeclaration
-			| TypeDeclaration
-			;
+Declaration = FunctionDeclaration | FieldDeclaration | TypeDeclaration;
 
 			
-FunctionDeclaration = Accessibility TypeName ID LPAREN ParameterList RPAREN LCURLY StatementList RCURLY
-			;
+FunctionDeclaration = Accessibility TypeName ID LPAREN ParameterList RPAREN LCURLY StatementList RCURLY;
 
-StatementList = Statement StatementList
-			|
-			;
+StatementList = Statement StatementList | ;
 
-FieldDeclaration = Accessibility TypeName ID SEMICOLON
-			;
+FieldDeclaration = Accessibility TypeName ID SEMICOLON;
 
-TypeDeclaration = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON
-			;
+TypeDeclaration = Accessibility TYPE ID EQL STRING_LITERAL SEMICOLON;
 
-Accessibility = PUBLIC
-			|
-			;
-
-TypeName = PrimitiveType
-			| ArrayType
-			| ID
-			;
-
-PrimitiveType = VOID
-			| BOOLEAN
-			| INT
-			;
-
-ArrayType = PrimitiveType LBRACKET RBRACKET ExtraArrayType
-          | ID LBRACKET RBRACKET ExtraArrayType
-          ;
-          
-ExtraArrayType = LBRACKET RBRACKET ExtraArrayType
-              | 
-              ;
+Accessibility = PUBLIC | ;
 
 
-ParameterList = Parameter COMMA ParameterList
-			  | Parameter
-			  |
-			  ;
+TypeName = PrimitiveType | ArrayType | ID;
+PrimitiveType = VOID | BOOLEAN | INT;
+ArrayType = PrimitiveType LBRACKET RBRACKET | ArrayType LBRACKET RBRACKET | ID LBRACKET RBRACKET ;
 
-Parameter = TypeName ID
-		  ;
+ParameterList = ParameterListInner |;
+ParameterListInner = Parameter | Parameter COMMA ParameterListInner;
+Parameter = TypeName ID;
 
 Statement = TypeName ID SEMICOLON
 		  | LCURLY StatementList RCURLY
@@ -107,9 +74,7 @@ Statement = TypeName ID SEMICOLON
 		  | Expression SEMICOLON
 		  ;
 
-Expression = Assignment
-		   | RHSExpression
-		   ;
+Expression = Assignment | RHSExpression;
 
 ExpressionsList = Expression COMMA ExpressionsList
 			  | Expression
